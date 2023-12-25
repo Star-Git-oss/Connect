@@ -144,6 +144,7 @@
   .home-creators {
     @apply hidden xl:flex flex-col w-72 2xl:w-465 px-6 py-10 gap-10  overflow-scroll custom-scrollbar;
   }
+  
 
   /* Post Details */
   .post_details-container {
@@ -238,9 +239,17 @@
     @apply sticky top-0 z-50 md:hidden bg-dark-2 w-full;
   }
 
+  .top-creator{
+      @apply flex xl:hidden w-full;
+  
+  }
+
   /* User card */
   .user-card {
     @apply flex-center flex-col gap-4 border border-dark-4 rounded-[20px] px-5 py-8;
+  }
+  .user-card-mobile {
+    @apply flex-center flex-col px-4 py-1;
   }
 }
 

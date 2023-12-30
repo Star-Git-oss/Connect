@@ -18,7 +18,7 @@ import FileUploader from "../shared/FileUploader"
 import { PostValidation } from "@/lib/validation"
 import { Models } from "appwrite"
 import { useUserContext } from "@/context/AuthContext"
-import { useCreatePost, useDeletePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations"
+import { useCreatePost, useUpdatePost } from "@/lib/react-query/queriesAndMutations"
 import { useToast } from "../ui/use-toast"
 import { useNavigate } from "react-router-dom"
 
@@ -36,7 +36,6 @@ const  PostForm = ({ post , action} : PostFormProps) => {
 
   const { mutateAsync: createPost, isPending: isLoadingCreate } = useCreatePost();
   const { mutateAsync: updatePost, isPending: isUpdatingPost } = useUpdatePost();
-  const { mutateAsync: deletePost, isPending: isDeletingPost } = useDeletePost();
   
 
    const form = useForm<z.infer<typeof PostValidation>>({

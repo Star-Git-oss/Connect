@@ -1,3 +1,4 @@
+import GridPostList from '@/components/shared/GridPostList';
 import Loader from '@/components/shared/Loader';
 import PostStats from '@/components/shared/PostStats';
 import { Button } from '@/components/ui/button';
@@ -74,8 +75,8 @@ const PostDetails = () => {
                     </p>
                     •
                     <p className="subtle-semibold lg:small-regular">
-                      {post?.location}
-                    </p>
+                          {post?.location ?? 'Unknown Location'}
+                    </p>  
                   </div>
                 </div>
               </Link>
@@ -95,7 +96,7 @@ const PostDetails = () => {
                 <Button
                   onClick={handleDeletePost}
                   variant="ghost"
-                  className={`ost_details-delete_btn ${
+                  className={`post_details-delete_btn ${
                     user.id !== post?.creator.$id && "hidden"
                   }`}>
                   <img
@@ -130,13 +131,17 @@ const PostDetails = () => {
         </div>
       )}
 
-      <div className="w-full max-w-5xl">
-        <hr className="border w-full border-dark-4/80" />
+       <div className="w-full max-w-5xl">
+          <hr className="border w-full border-dark-4/80" />
 
-        <h3 className="body-bold md:h3-bold w-full my-10">
-          More Related Posts
-        </h3>
-       
+          <h3 className="body-bold md:h3-bold w-full my-10">
+            More Related Posts
+          </h3>
+          {isUserPostLoading || !relatedPosts ? (
+            <Loader />
+          ) : (
+            <GridPostList posts={relatedPosts} />
+          )}
       </div>
     </div>
   );

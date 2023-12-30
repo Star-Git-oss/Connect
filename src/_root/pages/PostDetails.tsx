@@ -8,22 +8,23 @@ import { formatTimeAgo } from '@/lib/utils';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const PostDetails = () => {
-   const navigate = useNavigate();
-  const { id } = useParams();
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const { user } = useUserContext();
 
   const { data: post, isLoading } = useGetPostById(id || '');
   const { mutate: deletePost } = useDeletePost();
-  const {data: userPosts, isPending: isUserPostLoading} = useGetUserPosts(post?.creator.$id);
-  
+  const { data: userPosts, isPending: isUserPostLoading } = useGetUserPosts(post?.creator.$id);
+
   const relatedPosts = userPosts?.documents.filter(
     (userPost) => userPost.$id !== id
-  )
+  );
 
-  const handleDeletePost = () => {            
-    deletePost({ postId: id, imageId: post?.imageId });
+  const handleDeletePost = () => {
+    deletePost({ postId: id || '', imageId: post?.imageId });
     navigate(-1);
   };
+
 
   return (
     <div className="post_details-container">

@@ -330,7 +330,7 @@ export async function deletePost(postId: string, imageId: string){
 
 export async function getInfinitePosts({pageParam}: {pageParam: number} ){
 
-    const queries: any[] = [Query.orderDesc('$updatedAt'), Query.limit(10)]
+    const queries: string[] = [Query.orderDesc('$updatedAt'), Query.limit(10)]
     
     if(pageParam){
         queries.push(Query.cursorAfter(pageParam.toString()));
@@ -371,12 +371,12 @@ export async function searchPost(searchTerm: string){
     }
 }
 
-export async function getUsers() {
+export async function getUsers(limit?: number) {
   try {
     const users = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
-      [Query.orderDesc("$createdAt"), Query.limit(10)],
+      [Query.orderDesc("$createdAt"), Query.limit(limit ?? 10)],
     );
 
     if (!users) throw Error;

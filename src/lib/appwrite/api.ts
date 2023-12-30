@@ -371,7 +371,7 @@ export async function searchPost(searchTerm: string){
     }
 }
 
-export async function getUsers(limit?: number) {
+export async function getUsers() {
   try {
     const users = await databases.listDocuments(
       appwriteConfig.databaseId,
